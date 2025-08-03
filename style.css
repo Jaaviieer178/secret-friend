@@ -160,3 +160,40 @@ ul {
 .button-draw:hover {
     background-color: var(--color-button-hover);
 }
+
+.reiniciar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#btnReiniciar {
+    padding: 15px 30px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    background-color: var(--color-tertiary);
+    color: var(--color-text);
+    border: 2px solid #000;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#btnReiniciar:hover {
+    background-color: #a1a1a1;
+}
+
+.spinner {
+    border: 8px solid var(--color-tertiary);
+    border-top: 8px solid var(--color-primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: girar 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -11,6 +11,21 @@ function agregarAmigo() {
         return;
     }
 
+    // Comprobamos si el nombre ya existe (sin distinguir mayúsculas/minúsculas)
+    const existe = amigos.some(amigo => amigo.toLowerCase() === nombre.toLowerCase());
+
+    if (existe) {
+        alert(`El nombre "${nombre}" ya fue ingresado.`);
+    } else {
+        amigos.push(nombre);
+        console.log(amigos);
+
+        const lista = document.getElementById("listaAmigos");
+        const nuevoItem = document.createElement("li");
+        nuevoItem.textContent = nombre;
+        lista.appendChild(nuevoItem);
+    }
+
     //Agregamos el nombre al array
     amigos.push(nombre);
     console.log(amigos);
@@ -21,19 +36,41 @@ function agregarAmigo() {
 
     //Utilizo const para que no se pueda modificar el valor de la variable
 function sortearAmigo() {
-    //  Validamos que el array no esté vacío
+    //  Verificamos que haya al menos un nombre en el array de amigos
     if (amigos.length === 0) {
         alert("No hay nombres para sortear. Por favor, añade al menos uno.");
         return;
     }
 
-    // Generamos un índice aleatorio
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-
-    //  Obtenemos el nombre sorteado
-    const nombreSorteado = amigos[indiceAleatorio];
-
-    // Mostramos el resultado en la página
     const resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<li>🎁 El amigo secreto es: <strong>${nombreSorteado}</strong></li>`;
+
+    // Spinner que simula la carga
+    const spinner = document.getElementById("spinner");
+
+    //  Mostramos un mensaje de “sorteando...” y activamos el spinner
+    resultado.innerHTML = `<li>⏳ Sorteando el amigo secreto...</li>`;
+    spinner.style.display = "block";
+
+    //  Usamos setTimeout para simular una espera de 3 segundos antes de mostrar el resultado
+    setTimeout(() => {
+        const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+
+        const nombreSorteado = amigos[indiceAleatorio];
+        
+        spinner.style.display = "none";
+        
+        resultado.innerHTML = `<li> El amigo secreto es: <strong>${nombreSorteado}</strong></li>`;
+
+        document.getElementById("btnReiniciar").style.display = "block";
+    }, 3000); // Tiempo de espera en milisegundos (3000 = 3 segundos)
+}
+
+
+function reiniciarLista() {
+    amigos = []; // Reiniciamos el array
+    document.getElementById("listaAmigos").innerHTML = "";
+    document.getElementById("resultado").innerHTML = "";
+
+    // Ocultamos el botón de reinicio
+    document.getElementById("btnReiniciar").style.display = "none";
 }
