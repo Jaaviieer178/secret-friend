@@ -18,3 +18,22 @@ function agregarAmigo() {
     // Limpiamos el campo para que el usuario pueda ingresar otro nombre
     input.value = "";
 }
+
+    //Utilizo const para que no se pueda modificar el valor de la variable
+function sortearAmigo() {
+    //  Validamos que el array no esté vacío
+    if (amigos.length === 0) {
+        alert("No hay nombres para sortear. Por favor, añade al menos uno.");
+        return;
+    }
+
+    // Generamos un índice aleatorio
+    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+
+    //  Obtenemos el nombre sorteado
+    const nombreSorteado = amigos[indiceAleatorio];
+
+    // Mostramos el resultado en la página
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = `<li>🎁 El amigo secreto es: <strong>${nombreSorteado}</strong></li>`;
+}
